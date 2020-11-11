@@ -1,0 +1,130 @@
+<%- include('partials/header') -%>
+
+<div id="main" class="col-md-9 col-lg-10 d-md-block" style="padding-left: 1.5rem; padding-right: 1.5rem;">
+    <div class="row">
+        Hello World !!!
+    </div>
+    <!-- <div class="row align-item-center" style="position: absolute; width:75%">
+        <canvas class="my-4 w-100 chartjs-render-monitor" id="topPanel" width="2190" height="924"></canvas>
+    </div>
+    <div class="row">
+        <div class="col">
+            <canvas id="midLeft"></canvas>
+        </div>
+        <div class="col">
+            <canvas id="midRight"></canvas>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col align-item-center">
+            <canvas id="topPanel" width="700" height="150"></canvas>
+        </div>
+    </div>
+    <hr class="featurette-divider">
+    <div class="row">
+        <!-- 今日政府新闻 -->
+        <div class="col-md-6 featurette">
+            <h3 class="pb-4 mb-4 font-italic border-bottom"> 今日政府新闻 </h3>
+            <ul class="list-group">
+                <% data2.forEach(function(item){ %>
+                <li class="list-group-item">
+                    <h6><a href="<%= item.news_link %>"><%= item.news_title.substring(0, 20) %>...</a> <h7> <%= item.news_date %></h7></h6>
+                    
+                </li>
+                <% }) %>
+            </ul>
+        </div>
+        <!-- 今日政府新闻 END -->
+        <div class="col-md-6" style="background-color: red;">
+            <canvas id="midRight"></canvas>
+        </div>
+    </div>
+    <hr class="featurette-divider">
+    <div class="row">
+        <!-- 今日行业新闻  -->
+        <div class="col-md-6 featurette" style="background-color: blue;">
+            <h3 class="pb-4 mb-4 font-itatlic border-bottom"> 今日行业新闻 </h3>
+            <ul class="list-group">
+
+            </ul>
+        </div>
+        <!-- 今日行业新闻 END -->
+        <div class="col-md-6" style="background-color: yellow;">
+            <canvas id="midLeft"></canvas>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    var ctx = document.getElementById('topPanel').getContext('2d')
+
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [<% data.forEach(function (log) { %> "<%= log.news_date %>", <%}) %>],
+            datasets: [{
+                label: '每日新闻计数器',
+                labels: 'company count',
+                data: [<% data.forEach(function (log) { %> <%= log.count %>, <%}) %>]
+
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: '数据库每日新闻计数器'
+            }
+        }
+    })
+
+    var ctx1 = document.getElementById('midLeft').getContext('2d')
+
+    var midLeft = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+            datasets: [{
+                label: '公司A',
+                data: [10, 30, 20, 15, 45]
+            }, {
+                label: '公司B',
+                data: [30, 20, 15, 40, 50]
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Sample Demostration for Company'
+            }
+        }
+    })
+
+    var ctx2 = document.getElementById('midRight').getContext('2d')
+
+    var midRight = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+            datasets: [{
+                label: '公司A',
+                data: [28, 35, 13, 35, 20]
+            }, {
+                label: '公司B',
+                data: [27, 33, 28, 35, 40]
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Sample Demonstration for Industry'
+            }
+        }
+    })
+</script>
+
+<%- include('partials/footer') -%>
