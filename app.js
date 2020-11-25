@@ -12,7 +12,6 @@ var singleGovTracker = require('./models/singleGovDeptGet.js') // GET ---- Singl
 var readNews = require('./models/readNewsGet.js') // GET ---- Read news Page 
 var companyTracker = require('./models/companyTrackerGet.js') // GET ---- Company Tracker
 var singleComTracker = require('./models/singleComGet.js') // GET ---- Single company Tracker
-
 // ============= GET Router END ==============
 
 // ============= POST Router ==============
