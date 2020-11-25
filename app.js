@@ -40,7 +40,7 @@ app.use('/governmentTracker/', singleGovTracker)
 app.use('/readNews', readNews)
 app.use('/searchNews', searchNews)
 app.use('/companyTracker', companyTracker)
-app.use('/companyTracker/', singleGovTracker)
+app.use('/companyTracker/', singleComTracker)
 
 // ============= Router USE END ==============
 
