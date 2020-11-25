@@ -1,0 +1,54 @@
+<%- include('partials/header') -%>
+
+<div id='main' class="col-md-9 col-lg-10 d-md-block" style="padding-left: 1.5rem; padding-right: 1.5rem;">
+    <div class="row">
+        <h1>Hello World</h1>
+    </div>
+    <div class="row">
+        <div class="col align-item-center">
+            <canvas id='topPanel' width="700" height="150"></canvas>
+        </div>
+    </div>
+    <div class="row">
+        <!-- 政府部门相关新闻 -->
+        <div class="featurette">
+            <h3> <%= data[0].gov_dept_name%> 相关新闻 </h3>
+            <ul class="list-group">
+                <% data.forEach(function(item){ %>
+                    <li class="list-group-item">
+                        <h6><%= item.news_title %></h6>
+                        <h6><%= item.news_date %></h6>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+
+    
+
+
+</div>
+
+<script>
+    var ctx = document.getElementById('topPanel').getContext('2d')
+
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: '部门生气程度',
+                data: [50, 52.5, 53, 58, 60, 65]
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: '部门生气程度'
+            }
+        }
+    })
+</script>
+
+<%- include('partials/footer') -%>

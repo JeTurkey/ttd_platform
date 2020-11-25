@@ -1,0 +1,42 @@
+<%- include('partials/header') -%>
+
+<div id='main' class="col-md-9 col-lg-10 d-md-block" style="padding-left: 1.5rem; padding-right: 1.5rem;">
+    <div class="row">
+        <h1>Hello World</h1>
+    </div>
+    <!-- 搜索栏 -->
+    <div class="row">
+        <form action="/searchNews" method="POST" style="margin: 10px auto;">
+            <div class="form-group">
+                <label for="keyword">关键词搜索</label>
+                <input class="form-control" type="text" name="keyword" id="searchKeyWordInput">
+                <small class="form-text text-muted"> 功能正在完善，为了提高搜索精准度，请只搜索一个关键词，且不要有空格 </small>
+            </div>
+            <button type="submit" class="btn btn-primary">搜索</button>
+
+        </form>
+    </div>
+    <div class="row" style="margin: 10px auto;">
+        <!-- 新闻 -->
+        <div class="featurette">
+            <h3> <%= data[0].gov_dept_name%> 相关新闻 </h3>
+            <ul class="list-group">
+                <% data.forEach(function(item){ %>
+                <li class="list-group-item">
+                    <a href="<%= item.news_link %>">
+                        <h6><%= item.news_title %></h6>
+                    </a>
+                    <h6><%= item.news_date %></h6>
+                </li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+<%- include('partials/footer') -%>

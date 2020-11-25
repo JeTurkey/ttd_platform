@@ -6,10 +6,19 @@ var mysql = require("mysql")
 
 // Database Connection
 
+// var connection = mysql.createConnection({
+//     host: '127.0.0.1',
+//     port: 3306,
+//     user: 'root',
+//     password: 'Rayshi1994!',
+//     database: 'ttd',
+//     multipleStatements: true
+// })
+
 var connection = mysql.createConnection({
-    host: '127.0.0.1',
+    host: 'rm-bp11g1acc24v9f69t1o.mysql.rds.aliyuncs.com',
     port: 3306,
-    user: 'root',
+    user: 'rayshi',
     password: 'Rayshi1994!',
     database: 'ttd',
     multipleStatements: true
