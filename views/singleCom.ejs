@@ -35,10 +35,10 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [<% data.forEach(function(log){ %>"<%= log.news_date %>", <% })%>],
+            labels: [<% data2.forEach(function(log){ %>"<%= log.news_date %>", <% })%>],
             datasets: [{
                 label: '公司被点名热度',
-                data: [<% data.forEach(function(log){ %> <%= log.news_count %>, <%})%>]
+                data: [<% data2.forEach(function(log){ %> <%= log.news_count %>, <%})%>]
             }]
         },
         options: {
