@@ -5,15 +5,19 @@ var bodyParser = require('body-parser');
 
 
 
-// ============= Router ==============
-var index = require('./models/indexGet.js') // Index Page ---- GET
-var governmentTracker = require('./models/govDeptGet.js') // Government Tracker Page ---- GET
-var singleGovTracker = require('./models/singleGovDeptGet.js') // Single Government Tracker Page ---- GET
-var readNews = require('./models/readNewsGet.js') // Read news Page ---- GET
-var searchNews = require('./models/searchNewsPost.js') // Search News Page ---- POST
+// ============= GET Router ==============
+var index = require('./models/indexGet.js') // GET ---- Index Page 
+var governmentTracker = require('./models/govDeptGet.js') // GET ---- Government Tracker Page 
+var singleGovTracker = require('./models/singleGovDeptGet.js') // GET ---- Single Government Tracker Page 
+var readNews = require('./models/readNewsGet.js') // GET ---- Read news Page 
+var companyTracker = require('./models/companyTrackerGet.js') // GET ---- Company Tracker
 
 
-// ============= Router END ==============
+// ============= GET Router END ==============
+
+// ============= POST Router ==============
+var searchNews = require('./models/searchNewsPost.js') // POST ---- Search News Page 
+// ============= POST Router END ==============
 
 var app = express();
 
@@ -35,6 +39,7 @@ app.use('/governmentTracker', governmentTracker)
 app.use('/governmentTracker/', singleGovTracker)
 app.use('/readNews', readNews)
 app.use('/searchNews', searchNews)
+app.use('/companyTracker', companyTracker)
 
 // ============= Router USE END ==============
 

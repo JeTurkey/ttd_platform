@@ -1,0 +1,20 @@
+<%- include('partials/header') -%>
+
+<div id='main' class="col-md-9 col-lg-10 d-md-block" style="padding-left: 1.5rem; padding-right: 1.5rem;">
+    <div class="row">
+        公司分区
+    </div>
+
+    <% for(var i = 0; i < data.length; i+=3){ %>
+        <div class="row">
+            <% for(var j = 0; j <= (data.length - i) % 3; j++){ %>
+                <% try{ %><div class="col-4"> <a href="/companyTracker/<%= data[i+j].com_id %>"><%= data[i + j].com_name %></a></div><% }catch(err){}%>
+            <% }%>
+            
+        </div>
+    <% } %>
+
+
+</div>
+
+<%- include('partials/footer') -%>
