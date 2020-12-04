@@ -27,7 +27,7 @@ connection.connect()
 
 router.get('/:id', function(req, res){
     
-    queryString = 'select news_title, gov_dept_name, Date_format(news_date, \'%Y-%m-%d\') as news_date from gov_dept d join gov_news gn on gn.gov_dept_id = d.gov_dept_id join news n on n.news_id = gn.news_id where gn.gov_dept_id = ' + req.params.id + ' ORDER BY gn.news_id DESC LIMIT 7;'
+    queryString = 'select news_link, news_title, gov_dept_name, Date_format(news_date, \'%Y-%m-%d\') as news_date from gov_dept d join gov_news gn on gn.gov_dept_id = d.gov_dept_id join news n on n.news_id = gn.news_id where gn.gov_dept_id = ' + req.params.id + ' ORDER BY gn.news_id DESC LIMIT 7;'
 
     
 

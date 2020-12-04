@@ -16,7 +16,7 @@
             <ul class="list-group">
                 <% data.forEach(function(item){ %>
                     <li class="list-group-item">
-                        <h6><%= item.news_title %></h6>
+                        <a href="<%= item.news_link %>"><h6><%= item.news_title %></h6></a>
                         <h6><%= item.news_date %></h6>
                     </li>
                 <% }) %>
