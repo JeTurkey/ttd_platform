@@ -51,12 +51,14 @@ app.use(function(req, res, next){
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+
 // ============== 登陆代码 END =================
 
 
 // ============= Router USE ==============
 app.use('/', loginGet)
-// app.use('/', index)
+app.use('/home', index)
 app.use('/governmentTracker', governmentTracker)
 app.use('/governmentTracker/', singleGovTracker)
 app.use('/readNews', readNews)
