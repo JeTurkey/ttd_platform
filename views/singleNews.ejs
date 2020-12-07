@@ -18,7 +18,7 @@
 </div>
 
 <script>
-    var s = "<%= data[0].content.replace(/[\r\n]/g, "") %>";
+    var s = "<%= data[0].news_content.replace(/[\r\n]/g, "") %>";
     
     let doc = new DOMParser().parseFromString(s, 'text/html')
     document.getElementById('paragraph').innerHTML = doc.body.childNodes[0].textContent
