@@ -27,7 +27,6 @@ router.get('/:id', function(req, res){
             console.log(err)
             return err
         }else{
-            console.log(rst)
             res.render('singleNews', {data: rst})
         }
     })
