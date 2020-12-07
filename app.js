@@ -55,8 +55,8 @@ passport.deserializeUser(User.deserializeUser());
 
 
 // ============= Router USE ==============
-app.use('/portal', loginGet)
-app.use('/', index)
+app.use('/', loginGet)
+// app.use('/', index)
 app.use('/governmentTracker', governmentTracker)
 app.use('/governmentTracker/', singleGovTracker)
 app.use('/readNews', readNews)
