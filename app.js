@@ -39,6 +39,7 @@ app.use(require("express-session")({
 app.set("view engine", "ejs")
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended: true}))
+
 // ============== 登陆代码 =================
 app.use(expressSanitizer());
 app.use(passport.initialize())
@@ -59,13 +60,13 @@ passport.deserializeUser(User.deserializeUser());
 // ============= Router USE ==============
 app.use('/', loginGet)
 app.use('/home', isLoggedIn, index)
-app.use('/governmentTracker', governmentTracker)
-app.use('/governmentTracker/', singleGovTracker)
-app.use('/readNews', readNews)
-app.use('/readNews/', singleNews)
-app.use('/searchNews', searchNews)
-app.use('/companyTracker', companyTracker)
-app.use('/companyTracker/', singleComTracker)
+app.use('/governmentTracker', isLoggedIn, governmentTracker)
+app.use('/governmentTracker/', isLoggedIn, singleGovTracker)
+app.use('/readNews', isLoggedIn, readNews)
+app.use('/readNews/', isLoggedIn, singleNews)
+app.use('/searchNews', isLoggedIn, searchNews)
+app.use('/companyTracker', isLoggedIn, companyTracker)
+app.use('/companyTracker/', isLoggedIn, singleComTracker)
 
 // ============= Router USE END ==============
 
