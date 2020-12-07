@@ -12,6 +12,7 @@ var singleGovTracker = require('./models/singleGovDeptGet.js') // GET ---- Singl
 var readNews = require('./models/readNewsGet.js') // GET ---- Read news Page 
 var companyTracker = require('./models/companyTrackerGet.js') // GET ---- Company Tracker
 var singleComTracker = require('./models/singleComGet.js') // GET ---- Single company Tracker
+var singleNews = require('/models/singleNews.js') // GET ---- Single news
 // ============= GET Router END ==============
 
 // ============= POST Router ==============
@@ -37,6 +38,7 @@ app.use('/', index)
 app.use('/governmentTracker', governmentTracker)
 app.use('/governmentTracker/', singleGovTracker)
 app.use('/readNews', readNews)
+app.use('/readNews/', singleNews)
 app.use('/searchNews', searchNews)
 app.use('/companyTracker', companyTracker)
 app.use('/companyTracker/', singleComTracker)
