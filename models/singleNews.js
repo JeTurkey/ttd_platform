@@ -16,7 +16,7 @@ var connection = mysql.createConnection({
 // Connect
 connection.connect()
 
-outer.get('/:id', function(req, res){
+router.get('/:id', function(req, res){
     
     queryString = 'SELECT * FROM ttd.news n WHERE n.news_id=' + req.params.id + ';'
 
