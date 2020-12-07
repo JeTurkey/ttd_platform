@@ -5,16 +5,25 @@
         <h1>Hello World</h1>
     </div>
     <div class="row">
-        <%= data.news_title %>
+        <%= data[0].news_title %>
     </div>
     <div class="row">
-        <%= data.news_date %>
+        <%= data[0].news_date %>
     </div>
-    <div class="row">
-        <%= data.news_content %>
+    <div class="row" id="paragraph">
+        <%= data[0].news_content %>
     </div>
 
 
 </div>
+
+<script>
+    var s = "<%= data[0].content.replace(/[\r\n]/g, "") %>";
+    
+    let doc = new DOMParser().parseFromString(s, 'text/html')
+    document.getElementById('paragraph').innerHTML = doc.body.childNodes[0].textContent
+
+    
+</script>
 
 <%- include('partials/footer') -%>
