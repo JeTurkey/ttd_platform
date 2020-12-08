@@ -26,7 +26,7 @@ connection.connect()
 router.get('/:id', function(req, res){
 
     queryString1 = 'select news_link, news_title, com_name, Date_format(news_date, \'%Y-%m-%d\') as news_date from ttd.company c join ttd.com_news cn on cn.com_id = c.com_id join ttd.news n on n.news_id = cn.news_id where cn.com_id = ' + req.params.id + ' ORDER BY cn.news_id DESC LIMIT 7;'
-    queryString2 = 'select count(news_title) as news_count, Date_format(news_date, "%Y-%m-%d") as news_date from ttd.company c join ttd.com_news cn on cn.com_id = c.com_id join ttd.news n on n.news_id = cn.news_id where cn.com_id = ' + req.params.id + ' GROUP BY news_date;'
+    queryString2 = 'select count(news_title) as news_count, Date_format(news_date, "%Y-%m-%d") as news_date from ttd.company c join ttd.com_news cn on cn.com_id = c.com_id join ttd.news n on n.news_id = cn.news_id where cn.com_id = ' + req.params.id + ' GROUP BY news_date LIMIT 60;'
 
     connection.query(queryString1 + queryString2, [1, 2], function(err, rst){
         if(err){
