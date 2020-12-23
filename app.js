@@ -67,6 +67,14 @@ app.use('/readNews/', isLoggedIn, singleNews)
 app.use('/searchNews', isLoggedIn, searchNews)
 app.use('/companyTracker', isLoggedIn, companyTracker)
 app.use('/companyTracker/', isLoggedIn, singleComTracker)
+// app.use('/home', index)
+// app.use('/governmentTracker', governmentTracker)
+// app.use('/governmentTracker/', singleGovTracker)
+// app.use('/readNews', readNews)
+// app.use('/readNews/', singleNews)
+// app.use('/searchNews', searchNews)
+// app.use('/companyTracker', companyTracker)
+// app.use('/companyTracker/', singleComTracker)
 
 // ============= Router USE END ==============
 

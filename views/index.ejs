@@ -19,7 +19,14 @@
                 <% data2.forEach(function(item){ %>
                 <li class="list-group-item">
                     <h6><a href="<%= item.news_link %>"><%= item.news_title.substring(0, 20) %>...</a> <h7> <%= item.news_date %></h7></h6>
-                    
+                    <div>
+                        <% try{item.gov_tag.split(",").forEach(function(tag){ %>
+                            <h6><span class="badge rounded-pill bg-primary"><%= tag %></span></h6>
+                        <% })}catch(err){} %>
+                        <% try{item.com_tag.split(",").forEach(function(tag){ %>
+                            <h6><span class="badge rounded-pill bg-secondary"><%= tag %></span></h6>
+                        <% })}catch(err){} %>
+                    </div>
                 </li>
                 <% }) %>
             </ul>
@@ -53,7 +60,7 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [<% data.forEach(function (log) { %> "<%= log.news_date %>", <%}) %>],
+            labels: [<% data.forEach(function (log) { %> "<%= log.new_news_date %>", <%}) %>],
             datasets: [{
                 label: '每日新闻计数器',
                 labels: 'company count',

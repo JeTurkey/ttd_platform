@@ -27,12 +27,14 @@
                         <h6><%= item.news_title %></h6>
                     </a>
                     <h6><%= item.news_date %></h6>
-                    <% try{item.gov_tag.split(",").forEach(function(tag){ %>
-                        <h6><%= tag %></h6>
-                    <% })}catch(err){} %>
-                    <% try{item.com_tag.split(",").forEach(function(tag){ %>
-                        <h6><%= tag %></h6>
-                    <% })}catch(err){} %>
+                    <div class="row">
+                        <% try{item.gov_tag.split(",").forEach(function(tag){ %>
+                            <h6><span class="badge rounded-pill bg-primary"><%= tag %></span></h6>
+                        <% })}catch(err){} %>
+                        <% try{item.com_tag.split(",").forEach(function(tag){ %>
+                            <h6><span class="badge rounded-pill bg-secondary"><%= tag %></span></h6>
+                        <% })}catch(err){} %>
+                    </div>
                 </li>
                 <% }) %>
             </ul>
