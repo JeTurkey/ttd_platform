@@ -25,7 +25,7 @@ connection.connect()
 
 router.get('/', function(req, res){
 
-    queryString = 'SELECT news_title, news_link, Date_format(news_date, \'%Y-%m-%d\') as news_date FROM ttd.news ORDER BY news_id DESC LIMIT 30;'
+    queryString = 'SELECT news_title, news_link, Date_format(news_date, \'%Y-%m-%d\') as news_date, gov_tag, com_tag FROM ttd.news ORDER BY news_id DESC LIMIT 30;'
 
     connection.query(queryString, function(err, rst){
         if(err){

@@ -27,6 +27,12 @@
                         <h6><%= item.news_title %></h6>
                     </a>
                     <h6><%= item.news_date %></h6>
+                    <% item.gov_tag.split(",").forEach(function(tag){ %>
+                        <h6><%= tag %></h6>
+                    <% }) %>
+                    <% item.com_tag.split(",").forEach(function(tag){ %>
+                        <h6><%= tag %></h6>
+                    <% }) %>
                 </li>
                 <% }) %>
             </ul>
