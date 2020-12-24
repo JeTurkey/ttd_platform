@@ -41,7 +41,6 @@ router.get('/', function(req, res){
     queryString2 = 'SELECT DISTINCT news_title, news_id, Date_format(news_date, \"%Y-%m-%d\") as news_date, gov_tag, com_tag FROM ttd.news ORDER BY news_id DESC LIMIT 7;'
     queryString3 = 'select g.gov_dept_name, Date_format(nw.news_date, \'%y-%m-%d\') as news_date, count(*) as news_count From ttd.gov_dept g, ttd.gov_news n, ttd.news nw Where g.gov_dept_id = 5 and nw.news_id = n.news_id Group by g.gov_dept_name, news_date Order by nw.news_date desc;'
     queryString4 = 'select g.gov_dept_name, Date_format(nw.news_date, \'%y-%m-%d\') as news_date, count(*) as news_count From ttd.gov_dept g, ttd.gov_news n, ttd.news nw Where g.gov_dept_id = 1 and nw.news_id = n.news_id Group by g.gov_dept_name, news_date Order by nw.news_date desc;'
-    
     connection.query(queryString + queryString2 + queryString3 + queryString4, [1, 2, 3, 4], function(err, rst){
         if (err){
             console.log(err)

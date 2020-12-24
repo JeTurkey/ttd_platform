@@ -17,7 +17,7 @@
                 <% data.forEach(function(item){ %>
                     <li class="list-group-item">
                         <a href="<%=item.news_link%>"> <h6><%= item.news_title %></h6> </a>
-                        <h6><%= item.news_date %></h6>
+                        <h6><%= item.new_news_date %></h6>
                     </li>
                 <% }) %>
             </ul>
@@ -35,7 +35,7 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [<% data2.forEach(function(log){ %>"<%= log.news_date %>", <% })%>],
+            labels: [<% data2.forEach(function(log){ %>"<%= log.new_news_date %>", <% })%>],
             datasets: [{
                 label: '公司被点名热度',
                 data: [<% data2.forEach(function(log){ %> <%= log.news_count %>, <%})%>]
