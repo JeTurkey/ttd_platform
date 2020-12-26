@@ -38,7 +38,7 @@ router.get('/', function(req, res){
     queryString = 'SELECT COUNT(*) as count, Date_format(news_date, \'%y-%m-%d\') as new_news_date from ttd.news group by new_news_date ORDER BY new_news_date DESC LIMIT 30;'
     // 今日新闻
     // queryString2 = "SELECT DISTINCT news_title, n.news_id, news_link, gov_dept_name, Date_format(news_date, \'%y-%m-%d\') as news_date FROM ttd.gov_dept gd JOIN ttd.gov_news gn ON gn.gov_dept_id = gd.gov_dept_id JOIN ttd.news n ON n.news_id = gn.news_id WHERE gn.gov_dept_id = 1 ORDER BY n.news_id DESC LIMIT 7;"
-    queryString2 = 'SELECT DISTINCT news_title, news_id, Date_format(news_date, \"%Y-%m-%d\") as news_date, gov_tag, com_tag FROM ttd.news ORDER BY news_id DESC LIMIT 7;'
+    queryString2 = 'SELECT DISTINCT news_title, news_id, Date_format(news_date, \"%Y-%m-%d\") as news_date, gov_tag, com_tag, news_link FROM ttd.news ORDER BY news_id DESC LIMIT 7;'
     queryString3 = 'select g.gov_dept_name, Date_format(nw.news_date, \'%y-%m-%d\') as news_date, count(*) as news_count From ttd.gov_dept g, ttd.gov_news n, ttd.news nw Where g.gov_dept_id = 5 and nw.news_id = n.news_id Group by g.gov_dept_name, news_date Order by nw.news_date desc;'
     queryString4 = 'select g.gov_dept_name, Date_format(nw.news_date, \'%y-%m-%d\') as news_date, count(*) as news_count From ttd.gov_dept g, ttd.gov_news n, ttd.news nw Where g.gov_dept_id = 1 and nw.news_id = n.news_id Group by g.gov_dept_name, news_date Order by nw.news_date desc;'
     connection.query(queryString + queryString2 + queryString3 + queryString4, [1, 2, 3, 4], function(err, rst){
