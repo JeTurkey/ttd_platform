@@ -29,10 +29,10 @@
                     <h6><%= item.new_news_date %></h6>
                     <div class="row">
                         <% try{item.gov_tag.split(",").forEach(function(tag){ %>
-                            <h6><span class="badge rounded-pill bg-primary"><%= tag %></span></h6>
+                            <h6><span class="badge rounded-pill bg-danger text-light"><%= tag %></span></h6>
                         <% })}catch(err){} %>
                         <% try{item.com_tag.split(",").forEach(function(tag){ %>
-                            <h6><span class="badge rounded-pill bg-secondary"><%= tag %></span></h6>
+                            <h6><span class="badge rounded-pill bg-secondary text-light"><%= tag %></span></h6>
                         <% })}catch(err){} %>
                     </div>
                 </li>
