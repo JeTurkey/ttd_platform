@@ -61,6 +61,7 @@
                     <th scope="col">新闻来源</th> <!-- 来源 -->
                     <th scope="col">政府标签</th> <!-- 政府标签 -->
                     <th scope="col">企业标签</th> <!-- 企业标签 -->
+                    <th scope="col">原连接</th> <!-- 原连接 -->
                 </thead>
                 <tbody>
                     <% data.forEach(function(item){ %>
@@ -70,6 +71,7 @@
                         <th><%= item.news_source %></th>
                         <th><% try{item.gov_tag.split(",").forEach(function(tag){%><%=tag%>/<%})}catch(err){}%></th>
                         <th><% try{item.com_tag.split(",").forEach(function(tag){%><%=tag%>/<%})}catch(err){}%></th>
+                        <th><a href="<%= item.news_link %>">原链接</a></th>
                     </tr>
                     <% }) %>
                 </tbody>
