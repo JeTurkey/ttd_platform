@@ -34,7 +34,6 @@ router.get('/:id', function(req, res){
             console.log(err)
             return err
         }else{
-            console.log(rst[1])
             res.render('readNews', {data: rst[0], pageCount: rst[1], pageNumber: currentPage})
         }
     })
