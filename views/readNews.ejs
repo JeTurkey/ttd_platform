@@ -16,14 +16,26 @@
 
         </form>
     </div>
-    <div class="row" style="margin: 10px auto;">
+    <!-- 下分页栏 -->
+    <div class="row" style="margin: auto;">
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class='page-link' href="/readNews/<%= pageNumber - 1 %>" id="prevPage">上一页</a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/1" id="firstPage">1</a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/<%= pageNumber %>" id="currentPage"><%= Math.floor(pageNumber) %></a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/<%= Math.floor(pageCount[0].totalCount) / 10%>" id="endPage"><%= Math.floor(pageCount[0].totalCount / 10) %></a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/<%= Math.floor(pageNumber) + 1 %>" id="nextPage">下一页</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="row">
         <!-- 新闻 -->
-        <div class="featurette">
+        <!-- <div class="featurette" style="margin: auto;">
             <h3>  新闻 </h3>
             <ul class="list-group">
                 <% data.forEach(function(item){ %>
                 <li class="list-group-item">
-                    <a href="/readNews/<%= item.news_id %>" target="_blank">
+                    <a href="/readNews/singleNews/<%= item.news_id %>" target="_blank">
                         <h6><%= item.news_title %></h6>
                     </a>
                     <h6><%= item.new_news_date %></h6>
@@ -38,7 +50,44 @@
                 </li>
                 <% }) %>
             </ul>
+            
+        </div> -->
+        <!-- 新闻表格 -->
+        <div style="margin: auto;"> 
+            <table class="table table-strip table-hover" style="margin: 10px, 0px ;">
+                <thead>
+                    <th scope="col">新闻标题</th> <!-- 标题 -->
+                    <th scope="col">采集时间</th> <!-- 日期 -->
+                    <th scope="col">新闻来源</th> <!-- 来源 -->
+                    <th scope="col">政府标签</th> <!-- 政府标签 -->
+                    <th scope="col">企业标签</th> <!-- 企业标签 -->
+                </thead>
+                <tbody>
+                    <% data.forEach(function(item){ %>
+                    <tr>
+                        <th scope="row"><a href="/readNews/singleNews/<%= item.news_id%>" target="_blank"><%= item.news_title %></a></th>
+                        <th><%= item.new_news_date %></th>
+                        <th><%= item.news_source %></th>
+                        <th><% try{item.gov_tag.split(",").forEach(function(tag){%><%=tag%>/<%})}catch(err){}%></th>
+                        <th><% try{item.com_tag.split(",").forEach(function(tag){%><%=tag%>/<%})}catch(err){}%></th>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
         </div>
+    </div>
+        <!-- 新闻表格 END -->
+        <!-- 下分页栏 -->
+    <div class="row" style="margin: auto;">
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class='page-link' href="/readNews/<%= pageNumber - 1 %>" id="prevPage">上一页</a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/1" id="firstPage">1</a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/<%= pageNumber %>" id="currentPage"><%= Math.floor(pageNumber) %></a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/<%= Math.floor(pageCount[0].totalCount) / 10%>" id="endPage"><%= Math.floor(pageCount[0].totalCount / 10) %></a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/<%= Math.floor(pageNumber) + 1 %>" id="nextPage">下一页</a></li>
+            </ul>
+        </nav>
     </div>
 
 

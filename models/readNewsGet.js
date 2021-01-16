@@ -23,16 +23,19 @@ var connection = mysql.createConnection({
 // Connect
 connection.connect()
 
-router.get('/', function(req, res){
+router.get('/:id', function(req, res){
     // 读取所有新闻
-    queryString = 'SELECT news_id, news_title, news_link, Date_format(news_date, \'%Y-%m-%d\') as new_news_date, gov_tag, com_tag FROM ttd.news ORDER BY news_id DESC LIMIT 30;'
-
-    connection.query(queryString, function(err, rst){
-        if(err){
+    currentPage = req.params.id
+    readingNewsQuery = 'SELECT news_id, news_title, news_source, news_link, Date_format(news_date, \'%Y-%m-%d\') as new_news_date, gov_tag, com_tag FROM ttd.news ORDER BY news_id DESC LIMIT ' + 20 + ' OFFSET ' + ((currentPage - 1) * 20) + ';'
+    pageCountQuery = 'SELECT count(news_id) as totalCount from ttd.news;'
+    
+    connection.query(readingNewsQuery + pageCountQuery, [1, 2], function(err, rst){
+         if(err){
             console.log(err)
             return err
         }else{
-            res.render('readNews', {data: rst})
+            console.log(rst[1])
+            res.render('readNews', {data: rst[0], pageCount: rst[1], pageNumber: currentPage})
         }
     })
 })
