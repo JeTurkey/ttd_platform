@@ -1,16 +1,23 @@
 <%- include('partials/header') -%>
 
 <div id='main' class="col-md-9 col-lg-10 d-md-block" style="padding-left: 1.5rem; padding-right: 1.5rem;">
-    <div class="row">
-        <h1>Hello World</h1>
-    </div>
-    <div class="row">
-        <h3><%= data[0].news_title %></h3>
 
-        <h5><%= data[0].news_date %></h5>
+    <div class="row">
+        <div class="col-md-8">
+            <h3><%= data[0].news_title %></h3>
+
+            <h5><%= data[0].news_date %></h5>
+        </div>
     </div>
-    <div class="row" id="paragraph">
-        <%= data[0].news_content %>
+    <div class="row">
+        <div class="col-md-8" id="paragraph">
+            <%= data[0].news_content %>
+        </div>
+        <div class="col-md-4" style="border-left-style: solid; border-left-color: black;">
+            标签库工具栏
+            <h3>待开发</h3>
+        </div>
+
     </div>
 
 
@@ -18,11 +25,11 @@
 
 <script>
     var s = "<%= data[0].news_content.replace(/[\r\n]/g, "") %>";
-    
+
     let doc = new DOMParser().parseFromString(s, 'text/html')
     document.getElementById('paragraph').innerHTML = doc.body.childNodes[0].textContent
 
-    
+
 </script>
 
 <%- include('partials/footer') -%>

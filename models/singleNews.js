@@ -18,7 +18,7 @@ connection.connect()
 
 router.get('/singleNews/:id', function(req, res){
     
-    queryString = 'SELECT * FROM ttd.news n WHERE n.news_id=' + req.params.id + ';'
+    queryString = 'SELECT news_id, news_title, news_content, news_source, Date_format(news_date, \'%Y-%m-%d\') as new_news_date FROM ttd.news n WHERE n.news_id=' + req.params.id + ';'
 
     
 
