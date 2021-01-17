@@ -22,6 +22,7 @@ var companyTracker = require('./models/companyTrackerGet.js') // GET ---- Compan
 var singleComTracker = require('./models/singleComGet.js') // GET ---- Single company Tracker
 var singleNews = require('./models/singleNews.js') // GET ---- Single news
 var loginGet = require('./models/login.js') // GET ---- Login
+var industryTracker = require("./models/industryTrackerGet.js") // GET ---- industry Tracker
 // ============= GET Router END ==============
 
 // ============= POST Router ==============
@@ -67,6 +68,7 @@ app.use('/readNews/', isLoggedIn, singleNews)
 app.use('/searchNews', isLoggedIn, searchNews)
 app.use('/companyTracker', isLoggedIn, companyTracker)
 app.use('/companyTracker/', isLoggedIn, singleComTracker)
+app.use('/industryTracker', isLoggedIn, industryTracker)
 // app.use('/home', index)
 // app.use('/governmentTracker', governmentTracker)
 // app.use('/governmentTracker/', singleGovTracker)
@@ -75,6 +77,7 @@ app.use('/companyTracker/', isLoggedIn, singleComTracker)
 // app.use('/searchNews', searchNews)
 // app.use('/companyTracker', companyTracker)
 // app.use('/companyTracker/', singleComTracker)
+// app.use('/industryTracker', industryTracker)
 
 // ============= Router USE END ==============
 

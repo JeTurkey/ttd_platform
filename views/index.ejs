@@ -14,17 +14,14 @@
     <div class="row">
         <!-- 今日政府新闻 -->
         <div class="col-md-6 featurette">
-            <h3 class="pb-4 mb-4 font-italic border-bottom"> 今日政府新闻 </h3>
+            <h3 class="pb-4 mb-4 font-italic border-bottom"> 今日企业新闻（已标记） </h3>
             <ul class="list-group">
                 <% data2.forEach(function(item){ %>
                 <li class="list-group-item">
                     <h6><a href="/readNews/singleNews/<%= item.news_id %>"><%= item.news_title.substring(0, 20) %>...</a> <h7> <%= item.news_date %></h7></h6>
                     <div>
-                        <% try{item.gov_tag.split(",").forEach(function(tag){ %>
-                            <h6><span class="badge rounded-pill bg-danger text-light"><%= tag %></span></h6>
-                        <% })}catch(err){} %>
                         <% try{item.com_tag.split(",").forEach(function(tag){ %>
-                            <h6><span class="badge rounded-pill bg-secondary text-light"><%= tag %></span></h6>
+                            <span class="badge rounded-pill bg-secondary text-light"><%= tag %></span>
                         <% })}catch(err){} %>
                     </div>
                 </li>
@@ -32,17 +29,37 @@
             </ul>
         </div>
         <!-- 今日政府新闻 END -->
-        <div class="col-md-6" style="background-color: red;">
+        <!-- <div class="col-md-6" style="background-color: red;">
             <canvas id="midRight"></canvas>
+        </div> -->
+        <div class="col-md-6 featurette">
+            <h3 class="pb-4 mb-4 font-italic border-bottom"> 今日政府新闻（已标记） </h3>
+            <ul class="list-group">
+                <% data3.forEach(function(item){ %>
+                <li class="list-group-item">
+                    <h6><a href="/readNews/singleNews/<%= item.news_id %>"><%= item.news_title.substring(0, 20) %>...</a> <h7> <%= item.news_date %></h7></h6>
+                    <div>
+                        <% try{item.gov_tag.split(",").forEach(function(tag){ %>
+                            <span class="badge rounded-pill bg-danger text-light"><%= tag %></span>
+                        <% })}catch(err){} %>
+                    </div>
+                </li>
+                <% }) %>
+            </ul>
         </div>
     </div>
     <hr class="featurette-divider">
     <div class="row">
         <!-- 今日行业新闻  -->
-        <div class="col-md-6 featurette" style="background-color: blue;">
-            <h3 class="pb-4 mb-4 font-itatlic border-bottom"> 今日行业新闻 </h3>
+        <div class="col-md-6 featurette">
+            <h3 class="pb-4 mb-4 font-itatlic border-bottom"> 今日未标记新闻 </h3>
             <ul class="list-group">
+                <% data4.forEach(function(item){ %>
+                    <li class="list-group-item">
+                        <h6><a href="/readNews/singleNews/<%= item.news_id %>"><%= item.news_title.substring(0, 20) %>...</a> <h7> <%= item.news_date %></h7></h6>
 
+                    </li>
+                    <% }) %>
             </ul>
         </div>
         <!-- 今日行业新闻 END -->

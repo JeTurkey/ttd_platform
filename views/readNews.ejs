@@ -9,10 +9,10 @@
         <form action="/searchNews" method="POST" style="margin: 10px auto;">
             <div class="form-group">
                 <label for="keyword">关键词搜索</label>
-                <input class="form-control" type="text" name="keyword" id="searchKeyWordInput">
+                <input class="form-control" type="text" name="keyword" id="searchKeyWordInput" disabled placeholder="功能升级中...">
                 <small class="form-text text-muted"> 功能正在完善，为了提高搜索精准度，请只搜索一个关键词，且不要有空格 </small>
             </div>
-            <button type="submit" class="btn btn-primary">搜索</button>
+            <button type="submit" class="btn btn-primary" disabled>搜索</button>
 
         </form>
     </div>
@@ -29,30 +29,6 @@
         </nav>
     </div>
     <div class="row">
-        <!-- 新闻 -->
-        <!-- <div class="featurette" style="margin: auto;">
-            <h3>  新闻 </h3>
-            <ul class="list-group">
-                <% data.forEach(function(item){ %>
-                <li class="list-group-item">
-                    <a href="/readNews/singleNews/<%= item.news_id %>" target="_blank">
-                        <h6><%= item.news_title %></h6>
-                    </a>
-                    <h6><%= item.new_news_date %></h6>
-                    <div class="row">
-                        <% try{item.gov_tag.split(",").forEach(function(tag){ %>
-                            <h6><span class="badge rounded-pill bg-danger text-light"><%= tag %></span></h6>
-                        <% })}catch(err){} %>
-                        <% try{item.com_tag.split(",").forEach(function(tag){ %>
-                            <h6><span class="badge rounded-pill bg-secondary text-light"><%= tag %></span></h6>
-                        <% })}catch(err){} %>
-                    </div>
-                </li>
-                <% }) %>
-            </ul>
-            
-        </div> -->
-        <!-- 新闻表格 -->
         <div style="margin: auto;"> 
             <table class="table table-strip table-hover" style="margin: 10px, 0px ;">
                 <thead>
