@@ -77,16 +77,17 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [<% data5.forEach(function (log) { %> "<%= log.trade_date %>", <%}) %>],
+            labels: [<% data5.forEach(function (log) { %> "<%= log.new_trade_date %>", <%}) %>],
             datasets: [{
                 label: '沪深300指数',
                 labels: '沪深300指数',
+                yAxisID: 'hs300',
                 data: [<% data5.forEach(function (log) { %> <%= log.hs300_close %>, <%}) %>]
 
-            },
-            {
+            },{
                 label: '情绪分数',
                 labels: '情绪分数',
+                yAxisID: 'sentiment',
                 data: [<% data5.forEach(function (log) { %> <%= log.sentiment_score %>, <%}) %>]
             }]
         },
@@ -95,7 +96,20 @@
             title: {
                 display: true,
                 text: '沪深300 vs 情绪分数'
-            }
+            },
+            scales: {
+                yAxes: [{
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    id: 'hs300'
+                },{
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    id: 'sentiment'
+                }]
+            } 
         }
     })
 
