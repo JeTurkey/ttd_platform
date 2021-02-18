@@ -43,7 +43,7 @@ router.get('/', function(req, res){
     untaggedNews = 'SELECT DISTINCT news_title, news_id, Date_format(news_date, "%Y-%m-%d") as new_news_date FROM ttd.news WHERE char_length(com_tag) < 1 AND char_length(gov_tag) < 1 ORDER by news_id DESC LIMIT 7;'
     // queryString3 = 'select g.gov_dept_name, Date_format(nw.news_date, \'%y-%m-%d\') as news_date, count(*) as news_count From ttd.gov_dept g, ttd.gov_news n, ttd.news nw Where g.gov_dept_id = 5 and nw.news_id = n.news_id Group by g.gov_dept_name, news_date Order by nw.news_date desc;'
     // queryString4 = 'select g.gov_dept_name, Date_format(nw.news_date, \'%y-%m-%d\') as news_date, count(*) as news_count From ttd.gov_dept g, ttd.gov_news n, ttd.news nw Where g.gov_dept_id = 1 and nw.news_id = n.news_id Group by g.gov_dept_name, news_date Order by nw.news_date desc;'
-    score = 'SELECT trade_date, hs300_close, sentiment_score FROM ttd_test.hs300 WHERE trade_date > trade_date > date(\'2020-08-08\');'
+    score = 'SELECT trade_date, hs300_close, sentiment_score FROM ttd_test.hs300 WHERE trade_date > date(\'2020-08-08\');'
     connection.query(queryString + comNews + govNews + untaggedNews + score, [1, 2, 3, 4, 5], function(err, rst){
         if (err){
             console.log(err)
