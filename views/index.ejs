@@ -82,8 +82,7 @@
                 label: '沪深300指数',
                 labels: '沪深300指数',
                 yAxisID: 'hs300',
-                borderColor: window.chartColors.red,
-                backgroundColor: window.chartColors.red,
+                backgroundColor: 'rgba(220,20,60, 0.1)',
                 fill: false,
                 data: [<% data5.forEach(function (log) { %> <%= log.hs300_close %>, <%}) %>]
 
@@ -91,8 +90,7 @@
                 label: '情绪分数',
                 labels: '情绪分数',
                 yAxisID: 'sentiment',
-                borderColor: window.chartColors.red,
-                backgroundColor: window.chartColors.red,
+                backgroundColor: 'rgba(72,61,139, 0.1)',
                 fill: false,
                 data: [<% data5.forEach(function (log) { %> <%= log.sentiment_score %>, <%}) %>]
             }]
