@@ -77,11 +77,11 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [<% data.forEach(function (log) { %> "<%= log.new_news_date %>", <%}) %>],
+            labels: [<% data5.forEach(function (log) { %> "<%= log.trade_date %>", <%}) %>],
             datasets: [{
                 label: '每日新闻计数器',
                 labels: 'company count',
-                data: [<% data.forEach(function (log) { %> <%= log.count %>, <%}) %>]
+                data: [<% data5.forEach(function (log) { %> <%= log.hs300_close %>, <%}) %>]
 
             }]
         },
