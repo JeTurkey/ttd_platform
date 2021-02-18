@@ -79,17 +79,22 @@
         data: {
             labels: [<% data5.forEach(function (log) { %> "<%= log.trade_date %>", <%}) %>],
             datasets: [{
-                label: '每日新闻计数器',
-                labels: 'company count',
+                label: '沪深300指数',
+                labels: '沪深300指数',
                 data: [<% data5.forEach(function (log) { %> <%= log.hs300_close %>, <%}) %>]
 
+            },
+            {
+                label: '情绪分数',
+                labels: '情绪分数',
+                data: [<% data5.forEach(function (log) { %> <%= log.sentiment_score %>, <%}) %>]
             }]
         },
         options: {
             responsive: true,
             title: {
                 display: true,
-                text: '数据库每日新闻计数器'
+                text: '沪深300 vs 情绪分数'
             }
         }
     })
