@@ -81,6 +81,13 @@ app.use('/industryTracker', isLoggedIn, industryTracker)
 
 // ============= Router USE END ==============
 
+app.get('/public/icon/*', function(req, res){
+    res.sendFile(__dirname + "/" + req.url)
+    console.log('Request for ' + req.url + 'received')
+})
+
+
+
 // ============= 中间件 ==============
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
