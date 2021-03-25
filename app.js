@@ -23,6 +23,7 @@ var singleComTracker = require('./models/singleComGet.js') // GET ---- Single co
 var singleNews = require('./models/singleNews.js') // GET ---- Single news
 var loginGet = require('./models/login.js') // GET ---- Login
 var industryTracker = require("./models/industryTrackerGet.js") // GET ---- industry Tracker
+var singleIndTracker = require('./models/singleIndGet.js') // GET ---- Single Industry Page
 // ============= GET Router END ==============
 
 // ============= POST Router ==============
@@ -59,25 +60,27 @@ passport.deserializeUser(User.deserializeUser());
 
 
 // ============= Router USE ==============
-app.use('/', loginGet)
-app.use('/home', isLoggedIn, index)
-app.use('/governmentTracker', isLoggedIn, governmentTracker)
-app.use('/governmentTracker/', isLoggedIn, singleGovTracker)
-app.use('/readNews', isLoggedIn, readNews)
-app.use('/readNews/', isLoggedIn, singleNews)
-app.use('/searchNews', isLoggedIn, searchNews)
-app.use('/companyTracker', isLoggedIn, companyTracker)
-app.use('/companyTracker/', isLoggedIn, singleComTracker)
-app.use('/industryTracker', isLoggedIn, industryTracker)
-// app.use('/home', index)
-// app.use('/governmentTracker', governmentTracker)
-// app.use('/governmentTracker/', singleGovTracker)
-// app.use('/readNews', readNews)
-// app.use('/readNews/', singleNews)
-// app.use('/searchNews', searchNews)
-// app.use('/companyTracker', companyTracker)
-// app.use('/companyTracker/', singleComTracker)
-// app.use('/industryTracker', industryTracker)
+// app.use('/', loginGet)
+// app.use('/home', isLoggedIn, index)
+// app.use('/governmentTracker', isLoggedIn, governmentTracker)
+// app.use('/governmentTracker/', isLoggedIn, singleGovTracker)
+// app.use('/readNews', isLoggedIn, readNews)
+// app.use('/readNews/', isLoggedIn, singleNews)
+// app.use('/searchNews', isLoggedIn, searchNews)
+// app.use('/companyTracker', isLoggedIn, companyTracker)
+// app.use('/companyTracker/', isLoggedIn, singleComTracker)
+// app.use('/industryTracker', isLoggedIn, industryTracker)
+// app.use('/industryTracker/', isLoggedIn, singleIndTracker)
+app.use('/home', index)
+app.use('/governmentTracker', governmentTracker)
+app.use('/governmentTracker/', singleGovTracker)
+app.use('/readNews', readNews)
+app.use('/readNews/', singleNews)
+app.use('/searchNews', searchNews)
+app.use('/companyTracker', companyTracker)
+app.use('/companyTracker/', singleComTracker)
+app.use('/industryTracker', industryTracker)
+app.use('/industryTracker/', singleIndTracker)
 
 // ============= Router USE END ==============
 

@@ -20,23 +20,20 @@ var connection = mysql.createConnection({
     database: 'ttd',
     multipleStatements: true
 })
-
 // Connect
 connection.connect()
 
-
 router.get('/:id', function(req, res){
-    
-    queryString = 'select news_link, news_title, gov_dept_name, Date_format(n.news_date, \'%Y-%m-%d\') as news_date from gov_dept d join gov_news gn on gn.gov_dept_id = d.gov_dept_id join news n on n.news_id = gn.news_id where gn.gov_dept_id = ' + req.params.id + ' ORDER BY gn.news_id DESC LIMIT 7;'
 
-    
+    topic_news = 'select n.news_title, n.news_link, Date_format(n.news_date, "%Y-%m-%d") as new_record_date, com_tag, gov_tag from ttd.topic_news as tn left join news as n on tn.news_id = n.news_id where tn.topic_id = ' + req.params.id + ' order by new_record_date DESC limit 10; '
+    topic_trend = 'select topic_count, Date_format(record_date, "%Y-%m-%d") as new_record_date from ttd.topic_trend tt where tt.topic_id = ' + req.params.id + ' ORDER BY new_record_date DESC LIMIT 60;'
 
-    connection.query(queryString, function(err, rst){
+    connection.query(topic_news + topic_trend, [1, 2], function(err, rst){
         if(err){
             console.log(err)
             return err
         }else{
-            res.render('singleGovDept', {data: rst})
+            res.render('singleInd', {data: rst[0], data2: rst[1].reverse()})
         }
     })
 })

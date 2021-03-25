@@ -47,7 +47,7 @@
                         <th><%= item.news_source %></th>
                         <th><% try{item.gov_tag.split(",").forEach(function(tag){%><%=tag%>/<%})}catch(err){}%></th>
                         <th><% try{item.com_tag.split(",").forEach(function(tag){%><%=tag%>/<%})}catch(err){}%></th>
-                        <th><a href="<%= item.news_link %>">原链接</a></th>
+                        <th><a href="<%= item.news_link %>" target="_blank">原链接</a></th>
                     </tr>
                     <% }) %>
                 </tbody>
