@@ -15,7 +15,36 @@
         </div>
         <div class="col-md-4" style="border-left-style: solid; border-left-color: black;">
             标签库工具栏
-            <h3>待开发</h3>
+            
+            <h4>公司标签</h4>
+            <% try{ %>
+                <% data[0].com_tag.split(",").forEach(function(item){ %>
+                    <span class="badge rounded-pill bg-primary text-light"><%= item %></span>
+                <% }) %>
+            <% }catch(err){ %>
+                <span class="badge rounded-pill bg-primary text-light">暂无标签</span>
+            <% } %>
+            <% try{ %>
+                <h4>政府标签</h4>
+                <% data[0].gov_tag.split(",").forEach(function(item){ %>
+                    <span class="badge rounded-pill bg-secondary text-light"><%= item %></span>
+                <% }) %>
+            <% }catch(err){ %>
+                <span class="badge rounded-pill bg-secondary text-light">暂无标签</span>
+            <% } %>
+            <% try{ %>
+                <h4>话题/行业标签</h4>
+                <% data[0].topic_tag.split(",").forEach(function(item){ %>
+                    <span class="badge rounded-pill bg-success text-light"><%= item %></span>
+                <% }) %>
+            <% }catch(err){ %>
+                <span class="badge rounded-pill bg-success text-light">暂无标签</span>
+            <% } %>
+
+
+            
+
+            
         </div>
 
     </div>
