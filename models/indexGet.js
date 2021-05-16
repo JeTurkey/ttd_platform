@@ -47,13 +47,14 @@ router.get('/', function(req, res){
     topic_1_trend = 'SELECT * FROM ttd.topic_trend WHERE topic_id = 1 ORDER BY record_date DESC LIMIT 2;'
     topic_2_trend = 'SELECT * FROM ttd.topic_trend WHERE topic_id = 2 ORDER BY record_date DESC LIMIT 2;'
     topic_3_trend = 'SELECT * FROM ttd.topic_trend WHERE topic_id = 3 ORDER BY record_date DESC LIMIT 2;'
-    connection.query(queryString + comNews + govNews + untaggedNews + score + topic_1_trend + topic_2_trend + topic_3_trend, [1, 2, 3, 4, 5, 6, 7, 8], function(err, rst){
+    topic_4_trend = 'select date(record_date) as record_date, (select sum(topic_count) from topic_trend as b where b.record_date <= a.record_date and b.topic_id = 3 and b.`record_date` >= date_sub(curdate(), interval 30 day)) as cum_count from topic_trend as a where a.topic_id = 3 and `record_date` >= date_sub(curdate(), interval 30 day)'
+    connection.query(queryString + comNews + govNews + untaggedNews + score + topic_1_trend + topic_2_trend + topic_3_trend + topic_4_trend, [1, 2, 3, 4, 5, 6, 7, 8, 9], function(err, rst){
         if (err){
             console.log(err)
             return err
         } else {
             res.render('index', {data: rst[0].reverse(), data2: rst[1], data3: rst[2], data4: rst[3], data5: rst[4],
-                                 t1t: rst[5], t2t: rst[6], t3t: rst[7]})
+                                 t1t: rst[5], t2t: rst[6], t3t: rst[7], t4t: rst[8]})
         }
     })
 

@@ -2,32 +2,271 @@
 
 <div id='main' class="col-md-9 col-lg-10 d-md-block" style="padding-left: 1.5rem; padding-right: 1.5rem;">
     <div class="row">
-        <h1>Hello World</h1>
+        
     </div>
     <div class="row">
-        <div class="col align-item-center">
-            <canvas id='topPanel' width="700" height="150"></canvas>
+        <div class="col-sm-7 align-item-center ">
+            <canvas id='topPanel'></canvas>
         </div>
-    </div>
-    <div class="row">
-        <!-- 公司相关新闻 -->
-        <div class="featurette">
+        <div class="col-sm-1 border-right"></div>
+        <div class="col-sm-4">
             <h3> <%= data[0].com_name%> 相关新闻 </h3>
             <ul class="list-group">
                 <% data.forEach(function(item){ %>
                     <li class="list-group-item">
-                        <a href="<%=item.news_link%>" target="_blank"> <h6><%= item.news_title %></h6> </a>
+                        <a href="<%=item.news_link%>" target="_blank"> <h6><%= item.news_title %></h6></a>
                         <h6><%= item.new_news_date %></h6>
                     </li>
                 <% }) %>
             </ul>
         </div>
     </div>
+    <div class="row border-top" style="margin-top: 1%; margin-bottom: 1%;" ></div>
+    <div class="row " >
+        <!-- 公司相关新闻 -->
+        <div class="col-md-6" >
+            <div id='left-1' style="width: 600px;height:400px;"></div>
+        </div>
+        <div class="col-md-6">
+            <div id="right-1" style="width: 600px; height: 400px;"></div>
+        </div>
+    </div>
+    <div class="row border-top" style="margin-top: 1%; margin-bottom: 1%;" ></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="left-2" style="width: 600px;height:400px;"></div>
+        </div>
+        <div class="col-md-6">
+            <div id="right-2" style="width: 600px; height: 400px;"></div>
+        </div>
+    </div>
 
     
 
-
 </div>
+<script type="text/javascript">
+var myChart = echarts.init(document.getElementById('right-1'));
+
+// specify chart configuration item and data
+option = {
+    tooltip: {
+        trigger: 'item'
+    },
+    legend: {
+        top: '5%',
+        left: 'center'
+    },
+    series: [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                show: false,
+                position: 'center'
+            },
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '20',
+                    fontWeight: 'bold'
+                }
+            },
+            labelLine: {
+                show: false
+            },
+            data: [
+                <% source.forEach(function(log){ %>
+                    {value: <%= log.freq %>, name: "<%= log.news_source %>"},
+                <% }) %>
+            ]
+        }
+    ]
+};
+
+// use configuration item and data specified to show chart
+myChart.setOption(option);
+</script>
+<script type="text/javascript">
+    // based on prepared DOM, initialize echarts instance
+    var myChart = echarts.init(document.getElementById('left-1'));
+    var total = <%= recent[29].cum_count %>;
+    // specify chart configuration item and data
+    option = {
+    title: {
+        text: '事件报警器'
+    },
+    legend: {
+        data: '事件报警器'
+    },
+    grid: {
+            left: '5%',
+            right: '15%',
+            bottom: '10%'
+        },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: [<% recent.forEach(function (log) { %> "<%= log.record_date %>", <%}) %>]
+    },
+    yAxis: [{
+        type: 'value'
+    },{
+        type: 'value'
+    }],
+    
+    visualMap:{
+            top: 10,
+            right: 0,
+            orient: 'horizontal',
+            pieces: [{
+                gt: 0, 
+                lte: total * 0.3,
+                color: '#338BFF'
+            },{
+                gt: total * 0.3, 
+                lte: total * 0.6,
+                color: '#33FF9B'
+            },{
+                gt: total * 0.6, 
+                lte: total * 0.9,
+                color: '#FECF19'
+            },{
+                gt: total * 0.9, 
+                color: '#FE5819'
+            }],
+            outOfRange: {
+                color: '#999'
+            }
+        },
+    series: [
+        {
+            name: '侵权事件',
+            type: 'line',
+            yAxisIndex: 1,
+            data: [<% recent.forEach(function (log) { %> "<%= log.cum_count %>", <%}) %>],
+            markLine: {
+                silent: true,
+                lineStyle: {
+                    color: '#333'
+                },
+                data: [{
+                    yAxis: total * 0.3
+                }, {
+                    yAxis: total * 0.6
+                }, {
+                    yAxis: total * 0.9
+                }]
+            }
+        }
+    ]
+};
+
+    // use configuration item and data specified to show chart
+    myChart.setOption(option);
+</script>
+<script>
+    var myChart = echarts.init(document.getElementById('right-2'));
+
+    option = {
+    title: {
+        text: '话题归类总量'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    visualMap:{
+        top: 30,
+        right: -5,
+        orient: 'horizontal',
+        dimension: 0,
+        min: 0,
+        max: 20,
+        inRange: {
+            color: ['#65B581', '#FFCE34', '#FD665F']
+        },
+            outOfRange: {
+                color: '#999'
+            }
+    },
+    xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01]
+    },
+    yAxis: {
+        type: 'category',
+        data: [<% hot.forEach(function (log) { %> "<%= log.tag_name %>", <%}) %>]
+    },
+    series: [
+        {
+            name: '热度计数',
+            type: 'bar',
+            data: [<% hot.forEach(function (log) { %> <%= log.freq %>, <%}) %>]
+        }
+    ]
+};
+
+    myChart.setOption(option);
+</script>
+<script>
+    var myChart = echarts.init(document.getElementById('left-2'));
+    var all = <%= meter[0].pos + meter[0].neg %>
+    var good = <%= meter[0].pos %>
+    option = {
+        title:{
+            text: '情绪尺',
+            subtext: '数据统计截止最近一个交易日'
+        },
+
+        series: [
+            {
+                type: 'pie',
+                label: {
+                    show: false
+                },
+                center: ['40%', '50%'],
+                radius: ['40%', '70%'],
+                startAngle: 180,
+                data: [
+                    {
+                        name: 'Pos',
+                        value: good,
+                        itemStyle: {
+                            color: '#88F732'
+                        }
+                    },
+                    {
+                        name: 'Neg',// 实际显示部分是总量-用量
+                        value: all - good,
+                        itemStyle: {
+                            color: '#FE9619'
+                        }
+                    },
+                    {
+                        name: 'bottom',
+                        value: all,
+                        itemStyle: {
+                            color: 'transparent'
+                        }
+                    },
+                ]
+            }
+        ]
+    };
+
+    myChart.setOption(option);
+</script>
+
 
 <script>
     var ctx = document.getElementById('topPanel').getContext('2d')

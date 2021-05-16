@@ -25,7 +25,7 @@ connection.connect()
 
 router.get('/', function(req, res){
 
-    queryString = 'SELECT * FROM ttd.company;'
+    queryString = 'SELECT distinct a.com_id, com_name FROM ttd.company as a join topic_com as b on a.com_id = b.com_id;'
 
     connection.query(queryString, function(err, rst){
         if(err){

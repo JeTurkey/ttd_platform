@@ -7,6 +7,8 @@ var LocalStrategy = require('passport-local')
 var passportLocalMongoose = require('passport-local-mongoose');
 var expressSanitizer      = require("express-sanitizer")
 var User                  = require("./models/userSchema")
+require('echarts');
+
 // var chatjs = require("chart.js")
 
 // ============== MongoDB connection =============
