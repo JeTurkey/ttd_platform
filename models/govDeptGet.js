@@ -28,7 +28,7 @@ connection.connect()
 //
 
 router.get('/', function(req, res){
-    queryString = 'SELECT * FROM ttd.gov_dept;'
+    queryString = 'SELECT distinct a.gov_dept_id, gov_dept_name FROM ttd.gov_dept as a join topic_gov as b on a.gov_dept_id = b.gov_dept_id;;'
 
     connection.query(queryString, function(err, rst){
         if (err){
