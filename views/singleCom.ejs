@@ -274,10 +274,10 @@ myChart.setOption(option);
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [<% data2.forEach(function(log){ %>"<%= log.new_news_date %>", <% })%>],
+            labels: [<% totalhotness.forEach(function(log){ %>"<%= log.new_news_date %>", <% })%>],
             datasets: [{
                 label: '公司被点名热度',
-                data: [<% data2.forEach(function(log){ %> <%= log.news_count %>, <%})%>]
+                data: [<% totalhotness.forEach(function(log){ %> <%= log.freq %>, <%})%>]
             }]
         },
         options: {

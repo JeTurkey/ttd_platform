@@ -36,15 +36,15 @@ router.get('/:id', function(req, res){
     }
     
     indexMeter = 'select record_date, neg, pos from ttd.com_score where com_id = ' + req.params.id + ' and (neg <> 0 or pos <> 0) order by record_date desc limit 1;'
+    totalHotness = 'select Date_format(news_date, "%Y-%m-%d") as new_news_date, max(freq) as freq from (select date(a.news_date) as news_date, (select count(1) from ttd.topic_news as b where date(b.news_date) <= date(a.news_date) and b.topic_id = a.topic_id and b.news_date >= date_sub(a.news_date, interval 30 day) group by b.topic_id) as freq from ttd.topic_news as a left join ttd.topic_com as b on a.topic_id = b.topic_id where b.com_id = ' + req.params.id + ' and a.news_date >= date_sub(curdate(), interval 30 day) group by a.news_date, b.topic_id) as a group by news_date;'
     
-    
-    connection.query(queryString1 + queryString2 + recent30Days + focusSource + hotTopic + indexMeter
-        , [1, 2, 3, 4, 5, 6], function(err, rst){
+    connection.query(queryString1 + queryString2 + recent30Days + focusSource + hotTopic + indexMeter + totalHotness
+        , [1, 2, 3, 4, 5, 6, 7], function(err, rst){
         if(err){
             console.log(err)
             return err
         }else{
-            res.render('singleCom', {data: rst[0], data2: rst[1].reverse(), recent: rst[2], source: rst[3], hot: rst[4].reverse(), meter: rst[5]})
+            res.render('singleCom', {data: rst[0], data2: rst[1].reverse(), recent: rst[2], source: rst[3], hot: rst[4].reverse(), meter: rst[5], totalhotness: rst[6]})
         }
     })
 })
