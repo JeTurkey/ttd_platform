@@ -12,7 +12,6 @@ var mysql = require("mysql")
 //     multipleStatements: true
 // })
 
-
 var connection = mysql.createConnection({
     host: 'rm-bp11g1acc24v9f69t1o.mysql.rds.aliyuncs.com',
     port: 3306,
@@ -21,25 +20,24 @@ var connection = mysql.createConnection({
     database: 'ttd',
     multipleStatements: true
 })
-
 // Connect
 connection.connect()
 
-//
-
 router.get('/', function(req, res){
-    queryString = 'SELECT gov_dept_id, gov_dept_name FROM ttd.gov_dept;'
 
-    connection.query(queryString, function(err, rst){
+    get_all_industry = "SELECT * from ttd.t_ods_gics_industry"
+
+    connection.query(get_all_industry, function(err, rst){
         if (err){
-            console.log(err)
             return err
-        }else{
-            res.render('govDept', {data: rst})
+        } else {
+
+            res.render("TMS_industry", {data: rst})
         }
     })
 
 })
+
 
 
 module.exports = router;

@@ -27,15 +27,23 @@ connection.connect()
 
 //
 
-router.get('/', function(req, res){
-    queryString = 'SELECT gov_dept_id, gov_dept_name FROM ttd.gov_dept;'
+router.post('/', function(req, res){
+    topic_id = req.body.topic_id;
 
-    connection.query(queryString, function(err, rst){
+    gov_dept_id = req.body.gov_dept_id_in_topic;
+
+    console.log(topic_id)
+    console.log(gov_dept_id)
+    
+    queryString = 'INSERT IGNORE INTO ttd.tms_relationship (A, B) VALUES (\'' + topic_id + '\', \'' + gov_dept_id + '\');'
+    queryString2 = 'INSERT IGNORE INTO ttd.tms_relationship (A, B) VALUES (\'' + gov_dept_id + '\', \'' + topic_id + '\');'
+
+    connection.query(queryString + queryString2, [0, 1], function(err, rst){
         if (err){
             console.log(err)
             return err
         }else{
-            res.render('govDept', {data: rst})
+            res.redirect('back')
         }
     })
 

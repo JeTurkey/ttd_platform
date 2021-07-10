@@ -26,10 +26,18 @@ var singleNews = require('./models/singleNews.js') // GET ---- Single news
 var loginGet = require('./models/login.js') // GET ---- Login
 var industryTracker = require("./models/industryTrackerGet.js") // GET ---- industry Tracker
 var singleIndTracker = require('./models/singleIndGet.js') // GET ---- Single Industry Page
+var TMS_home = require("./models/TMS_homeGet.js") // GET -- TMS Homepage
+var TMS_department = require("./models/TMS_departmentGet.js") // GET -- TMS Department
+var TMS_department_mgmt = require("./models/TMS_department_mgmt.js") // GET -- TMS department management
+var TMS_industry = require("./models/TMS_industryGet.js") // GET -- TMS industry module
+var TMS_industry_mgmt = require("./models/TMS_industry_mgmt.js") // GET -- TMS industry management
+var TMS_topic = require("./models/TMS_topicGET.js") // GET -- TMS Topic
+var TMS_topic_mgmt = require("./models/TMS_topic_mgmt.js") // GET -- TMS Topic Management
 // ============= GET Router END ==============
 
 // ============= POST Router ==============
 var searchNews = require('./models/searchNewsPost.js') // POST ---- Search News Page 
+var tms_add_new_topic_dept = require('./models/TMS_add_new_topic_dept.js') // POST -- Add new topic relationship to department table
 // ============= POST Router END ==============
 
 var app = express();
@@ -62,27 +70,38 @@ passport.deserializeUser(User.deserializeUser());
 
 
 // ============= Router USE ==============
-app.use('/', loginGet)
-app.use('/home', isLoggedIn, index)
-app.use('/governmentTracker', isLoggedIn, governmentTracker)
-app.use('/governmentTracker/', isLoggedIn, singleGovTracker)
-app.use('/readNews', isLoggedIn, readNews)
-app.use('/readNews/', isLoggedIn, singleNews)
-app.use('/searchNews', isLoggedIn, searchNews)
-app.use('/companyTracker', isLoggedIn, companyTracker)
-app.use('/companyTracker/', isLoggedIn, singleComTracker)
-app.use('/industryTracker', isLoggedIn, industryTracker)
-app.use('/industryTracker/', isLoggedIn, singleIndTracker)
-// app.use('/home', index)
-// app.use('/governmentTracker', governmentTracker)
-// app.use('/governmentTracker/', singleGovTracker)
-// app.use('/readNews', readNews)
-// app.use('/readNews/', singleNews)
-// app.use('/searchNews', searchNews)
-// app.use('/companyTracker', companyTracker)
-// app.use('/companyTracker/', singleComTracker)
-// app.use('/industryTracker', industryTracker)
-// app.use('/industryTracker/', singleIndTracker)
+// app.use('/', loginGet)
+// app.use('/home', isLoggedIn, index)
+// app.use('/governmentTracker', isLoggedIn, governmentTracker)
+// app.use('/governmentTracker/', isLoggedIn, singleGovTracker)
+// app.use('/readNews', isLoggedIn, readNews)
+// app.use('/readNews/', isLoggedIn, singleNews)
+// app.use('/searchNews', isLoggedIn, searchNews)
+// app.use('/companyTracker', isLoggedIn, companyTracker)
+// app.use('/companyTracker/', isLoggedIn, singleComTracker)
+// app.use('/industryTracker', isLoggedIn, industryTracker)
+// app.use('/industryTracker/', isLoggedIn, singleIndTracker)
+// app.use('/tms', isLoggedIn, TMS_home)
+// app.use('/tms/department', isLoggedIn, TMS_department)
+// app.use('/tms/department/', isLoggedIn, TMS_department_mgmt)
+app.use('/home', index)
+app.use('/governmentTracker', governmentTracker)
+app.use('/governmentTracker/', singleGovTracker)
+app.use('/readNews', readNews)
+app.use('/readNews/', singleNews)
+app.use('/searchNews', searchNews)
+app.use('/companyTracker', companyTracker)
+app.use('/companyTracker/', singleComTracker)
+app.use('/industryTracker', industryTracker)
+app.use('/industryTracker/', singleIndTracker)
+app.use('/tms', TMS_home)
+app.use('/tms/department', TMS_department)
+app.use('/tms/department/', TMS_department_mgmt)
+app.use('/tms/add_new_relationship', tms_add_new_topic_dept)
+app.use('/tms/industry', TMS_industry)
+app.use('/tms/industry/', TMS_industry_mgmt)
+app.use('/tms/topic', TMS_topic)
+app.use('/tms/topic/', TMS_topic_mgmt)
 
 // ============= Router USE END ==============
 

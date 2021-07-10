@@ -1,0 +1,165 @@
+<%- include('partials/header') -%>
+
+<div id='main' class="col-md-9 col-lg-10 d-md-block" style="padding-left: 1.5rem; padding-right: 1.5rem;">
+    <div class="row">
+        GICS 行业管理模块
+    </div>
+    <div class="row">
+        <%= indTitle[0].idst_sub_name_chn %>
+    </div>
+    <div class="row">
+        <h3> 相关监管机构 </h3>
+    </div>
+    <div class="row">
+        <table class="table table-hover thead-dark">
+            <thead>
+                <tr>
+                    <th scope="col">部门ID</th>
+                    <th scope="col">部门名称</th>
+                    <th scope="col">重要人物</th>
+                    <th scope="col">重要人物权重</th>
+                    <th scope="col"> 修改 </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% govList.forEach(function(i){ %>
+                    <tr>
+                        <th scope="col"> <%= i.gov_dept_id %> </th>
+                        <th scope="col"> <%= i.gov_official_name %> </th>
+                        <th scope="col"> <%= i.person_name %> </th>
+                        <th scope="col"> <%= i.person_weight %> </th>
+                        <th scope="col"> <button></button></th>
+                    </tr>
+                <% }) %>
+                <th colspan="5">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".add-new-reg"> 添加新的关联监管机构 </button>
+                </th>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <h3> 相关公司 </h3>
+    </div>
+    <div class="row">
+        <table class="table table-hover thead-dark">
+            <thead>
+                <tr>
+                    <th scope="col">公司名称</th>
+                    <th scope="col">预留</th>
+                    <th scope="col">预留</th>
+                    <th scope="col">预留</th>
+                    <th scope="col"> 修改 </th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <th colspan="5">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".add-new-reg"> 添加新的关联监管机构 </button>
+                </th>
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+<!-- 添加监管机构弹窗模块 -->
+<div class="modal fade add-new-reg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        
+        <div class="modal-content">
+            <form action="/tms/add_new_relationship" method="POST">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> 添加关联监管 </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4">  </div>
+                    <div class="fade col-8"><input type="text" name="gov_dept_id_in_topic" value="<%= indTitle[0].idst_sub_id %>"></div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label for="topic_name"> 公司名称 </label>
+                    </div>
+                    <div class="col-8">
+                        <select class="custom-select" name="topic_id">
+                            <option selected>Choose...</option>
+                            <% newGovList.forEach(function(item){ %>
+                                <option id="selected_new_tag" value="<%= item.gov_dept_id %>"> <%= item.gov_dept_id %> - <%= item.gov_dept_name %> </option>
+                            <% }) %>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> 关闭 </button>
+                <button type="submit" class="btn btn-danger" > 添加 </button>
+            </div>
+        </form>
+        </div>
+    
+    </div>
+</div>
+<!-- 添加监管机构弹窗模块 END -->
+
+<!-- 添加关联公司弹窗模块 -->
+<div class="modal fade add-new-reg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        
+        <div class="modal-content">
+            <form action="/tms/add_new_relationship" method="POST">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> 添加关联公司 </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4">  </div>
+                    <div class="fade col-8"><input type="text" name="gov_dept_id_in_topic" value="<%= indTitle[0].idst_sub_id %>"></div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label for="topic_name"> 公司名称 </label>
+                    </div>
+                    <div class="col-8">
+                        <select class="custom-select" name="topic_id">
+                            <option selected>Choose...</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label for="topic_id"> 领域ID </label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="topic-id" disabled>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> 关闭 </button>
+                <button type="submit" class="btn btn-danger" > 添加 </button>
+            </div>
+        </form>
+        </div>
+    
+    </div>
+</div>
+<!-- 添加关联公司弹窗模块 END -->
+
+
+<%- include('partials/footer') -%>

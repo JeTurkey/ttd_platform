@@ -28,14 +28,14 @@ connection.connect()
 //
 
 router.get('/', function(req, res){
-    queryString = 'SELECT gov_dept_id, gov_dept_name FROM ttd.gov_dept;'
+    queryString = 'SELECT * FROM ttd.topic;'
 
     connection.query(queryString, function(err, rst){
         if (err){
             console.log(err)
             return err
         }else{
-            res.render('govDept', {data: rst})
+            res.render('TMS_topic', {data: rst})
         }
     })
 

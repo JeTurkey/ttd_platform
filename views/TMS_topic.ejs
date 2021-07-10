@@ -1,0 +1,24 @@
+<%- include('partials/header') -%>
+
+<div id='main' class="col-md-9 col-lg-10 d-md-block" style="padding-left: 1.5rem; padding-right: 1.5rem;">
+    <div class="row">
+        主题管理模块
+    </div>
+
+    <% for(var i = 0; i < data.length ; i+=5) { %>
+        <div class="row">
+            <% for(var j = 0; j < 5; j++){ %>
+                <% try{ %>
+                <div class="col">
+                     <a href = "/tms/topic/<%= data[i+j].topic_id %>" target = "_blank"> <%= data[i+j].tag_name %></a> 
+                </div>
+                <% }catch(err){} %>
+            <% } %>
+        </div>
+    <% } %>
+
+
+
+</div>
+
+<%- include('partials/footer') -%>

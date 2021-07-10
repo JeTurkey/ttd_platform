@@ -1,0 +1,43 @@
+<%- include('partials/header') -%>
+
+<div id='main' class="col-md-9 col-lg-10 d-md-block" style="padding-left: 1.5rem; padding-right: 1.5rem;">
+    <div class="row">
+        GICS 行业管理模块
+    </div>
+<div class="row">
+    <table class="table table-hover thead-dark">
+        <thead>
+            <tr>
+                <th scope="col">Sector</th>
+                <th scope="col">Industry Group</th>
+                <th scope="col">Industry</th>
+                <th scope="col">Sub-Industry</th>
+                <th scope="col"> 修改 </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(function(i){ %>
+                <tr>
+                    <th scope="row"><%= i.sector_name_chn %></th>
+                    <td><%= i.idst_grp_name_chn %></td>
+                    <td><%= i.idst_name_chn %></td>
+                    <td><%= i.idst_sub_name_chn %></td>
+                    <td><a href="/tms/industry/<%= i.idst_sub_id %>"><button type="button" class="btn btn-success" data-toggle="modal"
+                        data-target=".bd-example-modal-lg">查看</button></a></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+<%- include('partials/footer') -%>

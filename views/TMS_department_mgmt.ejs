@@ -1,0 +1,318 @@
+<%- include('partials/header') -%>
+
+    <div id='main' class="col-md-9 col-lg-10 d-md-block" style="padding-left: 1.5rem; padding-right: 1.5rem;">
+        <div class="row">
+            <%= data[0].gov_dept_name %> 标签管理
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <span> ID </span>
+                <span name="gov_dept_id">
+                    <%= data[0].gov_dept_id %>
+                </span>
+            </div>
+            <div class="col-md-6">
+                <label for="gov_dept_name"> 部门简称 </label>
+                <input type="text" id="gov_dept_name" value="<%= data[0].gov_official_name %>" disabled>
+            </div>
+        </div>
+        <!-- 标签列表 -->
+        <div class="row">
+            <div class="col-8">
+                <h3> 关注领域标签 </h3>
+            </div>
+        </div>
+        <table class="table table-strip table-hover" style="margin: 10px, 0px ;">
+            <thead>
+                <th scope="col">领域ID</th> <!-- 领域ID -->
+                <th scope="col">标签名称</th> <!-- 标签名称 -->
+                <th scope="col">标签字段</th> <!-- 标签字段 -->
+                <th scope="col"> 修改 </th>
+
+            </thead>
+            <tbody>
+                <% gt.forEach(function(item){ %>
+                    <tr>
+                        <th>
+                            <%= item.topic_id %>
+                        </th>
+                        <th>
+                            <%= item.tag_name %>
+                        </th>
+                        <th>
+                            <%= item.tag_search_by %>
+                        </th>
+                        <th><button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target=".bd-example-modal-lg-<%= item.topic_id %>">修改</button></th>
+                    </tr>
+                    <!-- 修改/删除领域弹窗 -->
+                    <div class="modal fade bd-example-modal-lg-<%= item.topic_id %>" tabindex="-1" role="dialog"
+                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"> 删除关注领域 </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-4">
+                                        <label for="topic_id"> 行业ID </label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" id='topic_id' value="<%= item.topic_id %>" disabled>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> 关闭 </button>
+                                    <button type="button" class="btn btn-danger"> 删除 </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 修改/删除领域弹窗 END -->
+                    <% }) %>
+                    <tr>
+                        <th colspan="4">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target=".add-new-topic"> 添加新的关注领域 </button>
+                            <!-- 添加领域弹窗模块 -->
+                            <div class="modal fade add-new-topic" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    
+                                    <div class="modal-content">
+                                        <form action="/tms/add_new_relationship" method="POST">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">添加关注领域</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-4">  </div>
+                                                <div class="fade col-8"><input type="text" name="gov_dept_id_in_topic" value="<%= data[0].gov_dept_id %>"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <label for="topic_name"> 领域名称 </label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <select class="custom-select" name="topic_id">
+                                                        <option selected>Choose...</option>
+                                                        <% topics.forEach(function(item){ %>
+                                                            <option id="selected_new_tag" value="<%= item.topic_id %>"> <%= item.topic_id %> - <%= item.tag_name %> </option>
+                                                        <% }) %>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <label for="topic_id"> 领域ID </label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input type="text" id="topic-id" disabled>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> 关闭 </button>
+                                            <button type="submit" class="btn btn-danger" > 添加 </button>
+                                        </div>
+                                    </form>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                             <!-- 领域弹窗模块 END -->
+                        </th>
+                    </tr>
+            </tbody>
+        </table>
+
+        <div class="row">
+            <h3>监管行业</h3>
+        </div>
+        <div class="row">
+            <table class="table table-strip table-hover" style="margin: 10px, 0px ;">
+                <thead>
+                    <th scope="col"> 二级行业 </th>
+                    <th scope="col"> 所属一级行业 </th>
+                    <th scope="col"> 关联标签数量 </th>
+                    <th scope="col"> 修改 </th>
+                </thead>
+                <tbody>
+                    <!-- 添加新的关联行业 -->
+                    <tr>
+                        <th colspan="6">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target=".add-new-industry"> 添加新的监管行业 </button>
+                        </th>
+                            <!-- 添加关联行业弹窗模块 -->
+                            <div class="modal fade add-new-industry" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">添加监管行业</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <label for="level-1-industry"> 一级行业名称 </label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <select class="custom-select" id="level-1-industry">
+                                                        <option selected>Choose...</option>
+                                                        <% topics.forEach(function(item){ %>
+                                                            <option id="selected_new_tag" value="<%= item.topic_id %>"> <%= item.topic_id %> - <%= item.tag_name %> </option>
+                                                        <% }) %>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <label for="level-2-industry"> 二级行业名称 </label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <select class="custom-select" id="level-2-industry">
+                                                        <option selected>Choose...</option>
+                                                        <% topics.forEach(function(item){ %>
+                                                            <option id="selected_new_tag" value="<%= item.topic_id %>"> <%= item.topic_id %> - <%= item.tag_name %> </option>
+                                                        <% }) %>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> 关闭 </button>
+                                            <button type="button" class="btn btn-danger" action="/tms/department/add-new-relationship" method="POST"> 添加 </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- 添加关联行业弹窗模块 END -->
+                        </th>
+                    </tr>
+                    <!-- 添加新的关联行业 END -->
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="row">
+            <h3> 内部关系 </h3>
+        </div>
+        <div class="row">
+            <table class="table table-strip table-hover" style="margin: 10px, 0px ;">
+                <thead>
+                    <th scope="col"> 姓名 </th>
+                    <th scope="col"> 学历 </th>
+                    <th scope="col"> 职务 </th>
+                    <th scope="col"> 是否重要人物 </th>
+                    <th scope="col"> 人物权重 </th>
+                    <th scope="col"> 修改 </th>
+                </thead>
+                <tbody>
+                    <% person.forEach(function(p){ %>
+                    <tr>
+                        <th> <%= p.person_name %> </th>
+                        <th> <%= p.person_degree %> </th>
+                        <th> <%= p.person_title %> </th>
+                        <th> <%= p.if_vip %> </th>
+                        <th> <%= p.person_weight %> </th>
+                        <th> <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".edit-person-<%= p.person_id %>"> 修改 </button></th>
+                    </tr>
+                        <div class="modal fade edit-person-<%= p.person_id %>" tabindex="-1" role="dialog"
+                            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"> 修改人物信息 </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="col-4">
+                                            <label for="topic_id"> 是否为重要人物 </label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" id='person-id' value="<%= p.if_vip %>">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> 关闭 </button>
+                                        <button type="button" class="btn btn-danger"> 提交 </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                        <!-- 添加新的内部人物 -->
+                    <tr>
+                        <th colspan="4">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target=".add-new-internal-person"> 添加新的关联内部关系 </button>
+                            <!-- 添加关联行业弹窗模块 -->
+                            <div class="modal fade add-new-internal-person" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">添加关联内部关系</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <label for="add-new-person"> 添加内部关系 </label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <select class="custom-select" id="add-new-person">
+                                                        <option selected>Choose...</option>
+                                                        <% addperson.forEach(function(p){ %>
+                                                            <option id="selected_new_tag" value="<%= p.person_id%>"> <%= p.person_id %> - <%= p.person_name %> </option>
+                                                        <% }) %>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> 关闭 </button>
+                                            <button type="button" class="btn btn-danger" action="/tms/department/add-new-relationship" method="POST"> 添加 </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- 添加关联行业弹窗模块 END -->
+                        </th>
+                    </tr>
+                    <!-- 添加新的关联行业 END -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- 按钮 -->
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 控制领域模块 -->
+
+    <!-- 控制领域模块 END -->
+
+    <%- include('partials/footer') -%>
