@@ -1,0 +1,77 @@
+<%- include('partials/header') -%>
+
+<div id='main' class="col-md-9 col-lg-10 d-md-block" style="padding-left: 1.5rem; padding-right: 1.5rem;">
+    <div class="row">
+        <h1>Hello World</h1>
+    </div>
+    <!-- 搜索栏 -->
+    <div class="row">
+        <form action="/searchNews" method="POST" style="margin: 10px auto;">
+            <div class="form-group">
+                <label for="keyword">关键词搜索</label>
+                <input class="form-control" type="text" name="keyword" id="searchKeyWordInput" disabled placeholder="功能升级中...">
+                <small class="form-text text-muted"> 功能正在完善，为了提高搜索精准度，请只搜索一个关键词，且不要有空格 </small>
+            </div>
+            <button type="submit" class="btn btn-primary" disabled>搜索</button>
+
+        </form>
+    </div>
+    <!-- 下分页栏 -->
+    <div class="row" style="margin: auto;">
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class='page-link' href="/readNews/searchedResults/<%= pageNumber - 1 %>" id="prevPage">上一页</a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/searchedResults/1" id="firstPage">1</a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/searchedResults/<%= pageNumber %>" id="currentPage"><%= Math.floor(pageNumber) %></a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/searchedResults/<%= Math.floor(pageCount[0].totalCount) / 10%>" id="endPage"><%= Math.floor(pageCount[0].totalCount / 10) %></a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/searchedResults/<%= Math.floor(pageNumber) + 1 %>" id="nextPage">下一页</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="row">
+        <div style="margin: auto;"> 
+            <table class="table table-strip table-hover" style="margin: 10px, 0px ;">
+                <thead>
+                    <th scope="col">新闻标题</th> <!-- 标题 -->
+                    <th scope="col">采集时间</th> <!-- 日期 -->
+                    <th scope="col">新闻来源</th> <!-- 来源 -->
+                    <th scope="col">政府标签</th> <!-- 政府标签 -->
+                    <th scope="col">企业标签</th> <!-- 企业标签 -->
+                    <th scope="col">原连接</th> <!-- 原连接 -->
+                </thead>
+                <tbody>
+                    <% data.forEach(function(item){ %>
+                    <tr>
+                        <th scope="row"><a href="/readNews/singleNews/<%= item.news_id%>" target="_blank"><%= item.news_title %></a></th>
+                        <th><%= item.new_news_date %></th>
+                        <th><%= item.news_source %></th>
+                        <th><% try{item.gov_tag.split(",").forEach(function(tag){%><%=tag%>/<%})}catch(err){}%></th>
+                        <th><% try{item.com_tag.split(",").forEach(function(tag){%><%=tag%>/<%})}catch(err){}%></th>
+                        <th><a href="<%= item.news_link %>" target="_blank">原链接</a></th>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+        <!-- 新闻表格 END -->
+        <!-- 下分页栏 -->
+    <div class="row" style="margin: auto;">
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class='page-link' href="/readNews/searchedResults/<%= pageNumber - 1 %>" id="prevPage">上一页</a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/searchedResults/1" id="firstPage">1</a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/searchedResults/<%= pageNumber %>" id="currentPage"><%= Math.floor(pageNumber) %></a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/searchedResults/<%= Math.floor(pageCount[0].totalCount) / 10%>" id="endPage"><%= Math.floor(pageCount[0].totalCount / 10) %></a></li>
+                <li class="page-item"><a class='page-link' href="/readNews/searchedResults/<%= Math.floor(pageNumber) + 1 %>" id="nextPage">下一页</a></li>
+            </ul>
+        </nav>
+    </div>
+
+
+
+
+</div>
+
+
+<%- include('partials/footer') -%>
